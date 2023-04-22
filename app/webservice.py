@@ -93,23 +93,7 @@ def transcribe(
     result = run_asr(audio_file.file, task, language, initial_prompt, method, encode)
     filename = audio_file.filename.split('.')[0]
     myFile = StringIO()
-<<<<<<< HEAD
     write_result(result, myFile, output, method)
-=======
-    if(output == "srt"):
-        WriteSRT(ResultWriter).write_result(result, file = myFile)
-    elif(output == "vtt"):
-        WriteVTT(ResultWriter).write_result(result, file = myFile)
-    elif(output == "tsv"):
-        WriteTSV(ResultWriter).write_result(result, file = myFile)
-    elif(output == "json"):
-        WriteJSON(ResultWriter).write_result(result, file = myFile)
-    elif(output == "txt"):
-        WriteTXT(ResultWriter).write_result(result, file = myFile)
-    else:
-        json_compatible_item_data = jsonable_encoder(result)
-        return JSONResponse(content=json_compatible_item_data)
->>>>>>> 15909e9 (add json output)
     myFile.seek(0)
     return StreamingResponse(myFile, media_type="text/plain", headers={'Content-Disposition': f'attachment; filename="{filename}.{output}"'})
 
